@@ -1,0 +1,14 @@
+/*
+https://platform.stratascratch.com/coding/9810-find-all-uses-that-have-more-than-3-friends?code_type=3
+Find all users that have more than 3 friends.
+*/
+
+WITH CTE AS (
+SELECT user_id FROM google_friends_network
+UNION ALL
+SELECT friend_id AS user_id FROM google_friends_network
+)
+
+SELECT user_id FROM CTE 
+GROUP BY user_id
+HAVING COUNT(*) >3
