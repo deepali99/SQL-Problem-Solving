@@ -1,0 +1,18 @@
+/*
+https://platform.stratascratch.com/coding/9819-sum-of-transportation-numbers?code_type=3
+Find the sum of all values between the lowest and highest transportation numbers (i.e., exclude the lowest and highest numbers in your sum).
+Your output should have 3 columns: the minimum number, maximum number, and summation.
+*/
+
+SELECT MIN(number) AS min, MAX(number) AS max,
+(SELECT SUM(number) 
+FROM 
+(
+SELECT number FROM transportation_numbers
+WHERE number!= 
+(SELECT min(number) FROM transportation_numbers) AND 
+number!= 
+(SELECT max(number) FROM transportation_numbers)
+     ) AS filtered_data
+  ) AS summation
+  FROM transportation_numbers;
