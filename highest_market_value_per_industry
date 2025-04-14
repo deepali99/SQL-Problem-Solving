@@ -1,0 +1,16 @@
+/*
+https://platform.stratascratch.com/coding/9799-find-industries-with-the-highest-market-value-in-asia?code_type=3
+Find industries with the highest market value in Asia.
+Output the industry along with the corresponding total market value.
+*/
+
+WITH CTE AS (
+SELECT industry, SUM(marketvalue) AS total_market_value
+FROM forbes_global_2010_2014 
+WHERE continent = 'Asia'
+GROUP BY industry)
+
+
+SELECT industry,
+MAX(total_market_value) AS highest_market_value
+FROM CTE
